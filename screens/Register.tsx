@@ -7,12 +7,10 @@ import { Formik } from "formik";
 import React from "react";
 import {
   View,
-  Platform,
-  ToastAndroid,
+  Image,
   TouchableOpacity,
   Text,
   StyleSheet,
-  Alert,
   ScrollView,
 } from "react-native";
 import InputField from "../components/InputField";
@@ -25,12 +23,20 @@ const Register = (props: Props) => {
     <ScrollView
       contentContainerStyle={{
         flexGrow: 1,
-        justifyContent: "center",
-        paddingTop: 40,
+        paddingTop: 60,
         backgroundColor: "white",
       }}
     >
       <View style={styles.container}>
+        <Image
+          source={require("../assets/logo.png")}
+          style={{
+            height: 100,
+            width: 100,
+            marginBottom: 10,
+            alignSelf: "center",
+          }}
+        />
         <Text style={styles.title}>Register</Text>
         <Formik
           initialValues={{
@@ -102,7 +108,7 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     flexGrow: 1,
-    alignContent: "center",
+    alignItems: "center",
     justifyContent: "center",
     marginLeft: "auto",
     marginRight: "auto",

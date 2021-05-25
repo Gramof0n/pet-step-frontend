@@ -8,7 +8,7 @@ import {
 } from "@react-navigation/drawer";
 import { StackActions, useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { get } from "../utils/apiCalls";
@@ -38,12 +38,19 @@ export const CustomDrawer = (props: Props) => {
       contentContainerStyle={{
         display: "flex",
         flex: 1,
+        margin: 0,
+        padding: 0,
       }}
       {...props}
     >
-      <View>
+      <View style={{ margin: 0, padding: 0 }}>
+        <StatusBar backgroundColor="#5E73BD" />
         <TouchableOpacity
-          style={[styles.image_button, styles.header]}
+          style={[
+            styles.image_button,
+            styles.header,
+            { backgroundColor: "#5E73BD", marginTop: -4 },
+          ]}
           onPress={() => {
             props.navigation.navigate("Profile");
           }}
@@ -54,7 +61,14 @@ export const CustomDrawer = (props: Props) => {
               uri: "https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png",
             }}
           />
-          <Text style={{ alignSelf: "center", margin: 15, fontSize: 18 }}>
+          <Text
+            style={{
+              alignSelf: "center",
+              margin: 15,
+              fontSize: 18,
+              color: "white",
+            }}
+          >
             {loggedUser?.username}
           </Text>
         </TouchableOpacity>

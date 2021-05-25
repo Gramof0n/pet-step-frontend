@@ -43,7 +43,10 @@ const Home = (props: Props) => {
         </View>
       ) : (
         <Drawer.Navigator
-          screenOptions={{ headerShown: true }}
+          screenOptions={{
+            headerShown: true,
+            headerStyle: { backgroundColor: "#5E73BD" },
+          }}
           drawerType="slide"
           drawerContent={(props) => {
             return <CustomDrawer {...props} />;
@@ -52,7 +55,11 @@ const Home = (props: Props) => {
           <Drawer.Screen
             component={MainContent}
             name="Main"
-            options={{ title: "Pet Step" }}
+            options={{
+              title: "Pet Step",
+              headerStyle: { backgroundColor: "#5E73BD" },
+              headerTintColor: "white",
+            }}
           />
         </Drawer.Navigator>
       )}

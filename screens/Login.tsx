@@ -11,6 +11,7 @@ import {
   StyleSheet,
   AsyncStorage,
   ToastAndroid,
+  Image,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import InputField from "../components/InputField";
@@ -22,6 +23,10 @@ type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 const Login = (props: Props) => {
   return (
     <View style={styles.container}>
+      <Image
+        source={require("../assets/logo.png")}
+        style={{ height: 100, width: 100, marginBottom: 10 }}
+      />
       <Text style={styles.title}>Login</Text>
       <Formik
         initialValues={{ username: "", password: "" }}
@@ -68,13 +73,13 @@ const Login = (props: Props) => {
         )}
       </Formik>
       <View style={{ marginTop: 8, display: "flex", flexDirection: "row" }}>
-        <Text>No account?</Text>
+        <Text>Don't have an account?</Text>
         <TouchableOpacity
           onPress={() => {
             props.navigation.navigate("Register");
           }}
         >
-          <Text style={{ color: "#607ebf" }}> Register here.</Text>
+          <Text style={{ color: "#607ebf" }}> Register.</Text>
         </TouchableOpacity>
       </View>
     </View>

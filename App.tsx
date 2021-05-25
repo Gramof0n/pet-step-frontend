@@ -30,7 +30,12 @@ export default function App() {
         <Stack.Screen
           component={Profile}
           name="Profile"
-          options={{ headerShown: true, title: "Your profile" }}
+          options={{
+            headerShown: true,
+            title: "Your profile",
+            headerStyle: { backgroundColor: "#5E73BD" },
+            headerTintColor: "white",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
