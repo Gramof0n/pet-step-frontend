@@ -4,15 +4,15 @@ export const formatDate = (utcString: number) => {
   const dayNo = utcDate.getDay();
   const monthNo = utcDate.getMonth();
 
-  console.log("UTC DATE: " + utcDate);
+  //console.log("UTC DATE: " + utcDate);
   let day = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
   let month = [
     "January",
@@ -38,7 +38,7 @@ export const formatDate = (utcString: number) => {
       ? `0${utcDate.getMinutes()}`
       : utcDate.getMinutes();
 
-  console.log(`HOUR: ${hour} MINUTE: ${minute}`);
+  //console.log(`HOUR: ${hour} MINUTE: ${minute}`);
 
   return `${day[dayNo]}, ${date}. ${month[monthNo]} ${hour}:${minute}`;
 };

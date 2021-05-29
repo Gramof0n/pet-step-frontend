@@ -28,7 +28,7 @@ const WeatherDisplay = () => {
   );
 
   async function getLocation() {
-    let { status } = await Location.requestBackgroundPermissionsAsync();
+    let { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== "granted") {
       console.log("Nema lokacije");
@@ -39,6 +39,8 @@ const WeatherDisplay = () => {
     }
 
     const location = await Location.getCurrentPositionAsync({});
+    console.log("Uzelo lokaciju");
+    setErrorMsg("");
     setLocation(location);
   }
 
@@ -74,13 +76,18 @@ const WeatherDisplay = () => {
       ) : errorMsg !== "" ? (
         <TouchableOpacity
           onPress={async () => {
-            await Location.requestBackgroundPermissionsAsync();
+            await getLocation();
           }}
         >
           <Text>{errorMsg}</Text>
         </TouchableOpacity>
       ) : (
-        <View style={styles.wrapper}>
+        <TouchableOpacity
+          style={styles.wrapper}
+          onPress={async () => {
+            await getWeather();
+          }}
+        >
           <Image
             style={styles.weather_icon}
             source={{
@@ -88,14 +95,14 @@ const WeatherDisplay = () => {
             }}
           />
           <Text style={styles.weather_type}>
-            {weather?.weather[0].main} - {weather?.main.temp}°C
+            {weather?.weather[0].main} - {weather?.main.temp.toString()}°C
           </Text>
           <Text style={styles.weather_wind}>
             Wind: {weather?.wind.speed}m/s
           </Text>
 
           <Text>{`${formatDate(weather!.dt)}, ${weather?.name}`}</Text>
-        </View>
+        </TouchableOpacity>
       )}
     </View>
   );
@@ -104,7 +111,6 @@ const WeatherDisplay = () => {
 const styles = StyleSheet.create({
   wrapper: {
     display: "flex",
-    backgroundColor: "#ebebeb",
     padding: 10,
     borderRadius: 10,
   },

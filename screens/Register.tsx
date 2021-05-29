@@ -2,6 +2,7 @@ import {
   DrawerContentComponentProps,
   DrawerContentOptions,
 } from "@react-navigation/drawer";
+import { StackActions } from "@react-navigation/native";
 import axios from "axios";
 import { Formik } from "formik";
 import React from "react";
@@ -12,8 +13,11 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  Platform,
+  ToastAndroid,
 } from "react-native";
 import InputField from "../components/InputField";
+import { post } from "../utils/apiCalls";
 import { mapError } from "../utils/mapError";
 
 type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
@@ -45,7 +49,19 @@ const Register = (props: Props) => {
             email: "",
             confirmPassword: "",
           }}
-          onSubmit={async (values, { setErrors }) => {}}
+          onSubmit={async (values, { setErrors }) => {
+            const res = await post("register", values);
+
+            if (res?.data.error && typeof res !== "undefined") {
+              setErrors(mapError(res.data.error));
+              return;
+            }
+
+            if (Platform.OS === "android") {
+              ToastAndroid.show("Registered successfully", ToastAndroid.SHORT);
+            }
+            props.navigation.goBack();
+          }}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
             <View>

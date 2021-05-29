@@ -1,14 +1,21 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import {
+  DrawerContentComponentProps,
+  DrawerContentOptions,
+} from "@react-navigation/drawer";
+import { View, StyleSheet } from "react-native";
+import WalkButton from "../components/WalkButton";
 import WeatherDisplay from "../components/WeatherDisplay";
 
-interface Props {}
+type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 
 const MainContent = (props: Props) => {
   return (
     <View style={styles.container}>
       <WeatherDisplay />
-      <Text>MAIN CONTENT</Text>
+      <View style={styles.wrapper}>
+        <WalkButton navigation={props.navigation} />
+      </View>
     </View>
   );
 };
@@ -19,6 +26,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexGrow: 1,
     padding: 10,
+  },
+
+  wrapper: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
   },
 });
 

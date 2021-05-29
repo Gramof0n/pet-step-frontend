@@ -11,6 +11,9 @@ import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import { CustomDrawer } from "../components/CustomDrawer";
 import { get } from "../utils/apiCalls";
 import MainContent from "./MainContent";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Achievements from "./Achievements";
+import WalkHistory from "./WalkHistory";
 
 type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 
@@ -56,9 +59,38 @@ const Home = (props: Props) => {
             component={MainContent}
             name="Main"
             options={{
-              title: "Pet Step",
+              title: "Home",
               headerStyle: { backgroundColor: "#5E73BD" },
               headerTintColor: "white",
+              drawerIcon: () => {
+                return <Icon name="home" size={20} color="#5E73BD" />;
+              },
+            }}
+          />
+
+          <Drawer.Screen
+            component={Achievements}
+            name="Achievements"
+            options={{
+              title: "Achievements",
+              headerStyle: { backgroundColor: "#5E73BD" },
+              headerTintColor: "white",
+              drawerIcon: () => {
+                return <Icon name="trophy-variant" size={20} color="#5E73BD" />;
+              },
+            }}
+          />
+
+          <Drawer.Screen
+            component={WalkHistory}
+            name="History"
+            options={{
+              title: "History",
+              headerStyle: { backgroundColor: "#5E73BD" },
+              headerTintColor: "white",
+              drawerIcon: () => {
+                return <Icon name="history" size={20} color="#5E73BD" />;
+              },
             }}
           />
         </Drawer.Navigator>

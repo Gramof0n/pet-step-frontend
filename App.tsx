@@ -5,6 +5,7 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Profile from "./screens/Profile";
 import Register from "./screens/Register";
+import Walk from "./screens/Walk";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -33,6 +34,17 @@ export default function App() {
           options={{
             headerShown: true,
             title: "Your profile",
+            headerStyle: { backgroundColor: "#5E73BD" },
+            headerTintColor: "white",
+          }}
+        />
+
+        <Stack.Screen
+          component={Walk}
+          name="Walk"
+          options={{
+            headerShown: true,
+            title: "Walk",
             headerStyle: { backgroundColor: "#5E73BD" },
             headerTintColor: "white",
           }}
