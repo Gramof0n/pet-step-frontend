@@ -14,6 +14,7 @@ import MainContent from "./MainContent";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Achievements from "./Achievements";
 import WalkHistory from "./WalkHistory";
+import Stats from "./Stats";
 
 type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 
@@ -90,6 +91,25 @@ const Home = (props: Props) => {
               headerTintColor: "white",
               drawerIcon: () => {
                 return <Icon name="history" size={20} color="#5E73BD" />;
+              },
+            }}
+          />
+
+          <Drawer.Screen
+            component={Stats}
+            name="Stats"
+            options={{
+              title: "Statistics",
+              headerStyle: { backgroundColor: "#5E73BD" },
+              headerTintColor: "white",
+              drawerIcon: () => {
+                return (
+                  <Icon
+                    name="clipboard-list-outline"
+                    size={20}
+                    color="#5E73BD"
+                  />
+                );
               },
             }}
           />
