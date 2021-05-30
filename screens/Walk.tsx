@@ -20,6 +20,10 @@ import {
   DrawerContentOptions,
 } from "@react-navigation/drawer";
 
+/*
+  OVDJE ISPOD SAM ISPISAO NEKI SHIT STO SE TICE POLYLINEA, BITNO ZA ONOG KO CE SE BAKCAT ISTORIJOM 
+*/
+
 type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 
 type LatLng = {
@@ -109,13 +113,22 @@ const Walk = (props: Props) => {
           <TouchableOpacity
             style={styles.button_stop}
             onPress={() => {
-              //Ovo zove funkciju da se enkodiraju koordinate hodanja u onaj polyline
-              //Funkciju za taj shit bi iskreno valjalo prebacit na backend ali eto, moze cucat i ovdje
-              //Sad ovaj polyline koji se ovdje enkodira treba slat na backend da se storeuje u databazu (ne znam ko radi history, al on bi trebao to da handleuje)
-              //Naravno u history screenu bi se opet uzela ova mapa i samo bi se dekodirao polyline (ima neka biblioteka na netu, nisam je instalirao)
-              //(kod za enkodiranje sam fala bogu nasao na netu lmao, ne bi ja cackao sad algoritam crni daleko bilo)
-              //Sve ove podatke ispod iz ovog console log-a bi trebalo slat na backend ko sto rekoh
-              //Vrijeme se u bazi cuva nekako drukcije, ovdje je string samo, valja to vidjet pa ga konvertovat u taj bazni format ili prebacit bazu na string, ne znam.
+              /*
+              Ovo zove funkciju da se enkodiraju koordinate hodanja u onaj polyline
+
+              Funkciju za taj shit bi iskreno valjalo prebacit na backend ali eto, moze cucat i ovdje
+
+              Sad ovaj polyline koji se ovdje enkodira treba slat na backend da se storeuje u databazu (ne znam ko radi history, al on bi trebao to da handleuje)
+
+              Naravno u history screenu bi se opet uzela ova mapa i samo bi se dekodirao polyline (ima neka biblioteka na netu, nisam je instalirao)
+
+              (kod za enkodiranje sam fala bogu nasao na netu lmao, ne bi ja cackao sad algoritam crni daleko bilo)
+
+              Sve ove podatke ispod iz ovog console log-a bi trebalo slat na backend ko sto rekoh
+              
+              Vrijeme se u bazi cuva nekako drukcije, ovdje je string samo, valja to vidjet pa ga konvertovat u taj bazni format ili prebacit bazu na string, ne znam.
+              */
+
               const encoded_polyline = encodePolyline(latLng);
               console.log(
                 `Enkodiran polyline: ${encoded_polyline}\nVrijeme: ${time}\nDatum: ${new Date()}`

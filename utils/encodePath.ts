@@ -3,6 +3,33 @@ type LatLng = {
   longitude: number;
 };
 
+/*
+  Algoritam za kodiranje onog crnog polylinea za mapu, naso na netu
+
+  Ima objasnjenje na guglovoj dokumentaciji da ti napravis od pocetka sam ako oces,
+  ali jelte, ko ima zapravo vremena za to i ko ce glavu lomit kad postoji gugl
+
+  Trebace se ovo dekodirat u history screenu ko sto napisah tamo u Walk screenu cini mi se,
+  al ima neka biblioteka, vidio sam.
+
+  Jedino kod te biblioteke je problem sto ocekuje input koordinata kao niz nizova dok sam ja
+  stavio da su koordinate zapravo niz objekata koji imaju ono standardno, lat, lon
+
+  Nece bit problem samo prilagodit output kad se dekodira polyline u taj format
+
+  Format je znaci: 
+
+  LatLng: {
+    lattitude:number,
+    longitude:number
+  },
+
+  a iz tog shita za dekodiranje ce se dobit ovako nesto: 
+
+  [[lat,lon], [lat,lon]...itd]
+
+*/
+
 export function encodePolyline(coords: Array<LatLng>) {
   var i = 0;
 

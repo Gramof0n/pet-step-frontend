@@ -16,6 +16,15 @@ import Achievements from "./Achievements";
 import WalkHistory from "./WalkHistory";
 import Stats from "./Stats";
 
+/**
+ E sad, ono sto je bio Stack.Navigator tamo u App.ts komponenti, ova komponenta je za Drawer.Navigator
+
+ Znaci svaki novi screen koji ce da bude "veci" da kazem (znaci da ce da ima podscreenove koji idu u onaj Stack tamo u App-u)
+ ide ovdje.
+
+ Ista filozofija ko sa onim Stackom, lako za baratat sa.
+ */
+
 type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 
 const Home = (props: Props) => {

@@ -18,6 +18,14 @@ import InputField from "../components/InputField";
 import { post } from "../utils/apiCalls";
 import { mapError } from "../utils/mapError";
 
+/*
+  Za baratanje sa formama sam koristio bibilioteku Formik, jer je, jelte, veri faking gud
+  
+  Nije teska za koriscenje a da fine mogucnosti onako
+
+  Poguglajte dokumentaciju ili neki tutorial ako budete koristili
+*/
+
 type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 
 const Login = (props: Props) => {

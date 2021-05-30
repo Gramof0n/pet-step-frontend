@@ -9,6 +9,13 @@ import WeatherDisplay from "../components/WeatherDisplay";
 
 type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 
+/*
+  E OVDJE se zapravo zove sve sto ce da se vidi golim okom
+
+  Mislim, ovo je vec gotovo jelte, osim ako neko nece jos nesto da dodaje,
+  al po Subarinom dizajnu, main screen ovako izgleda i radi sve
+*/
+
 const MainContent = (props: Props) => {
   return (
     <View style={styles.container}>

@@ -1,3 +1,11 @@
+/*
+  Ako kome bude trebao datum da vadi iz nekog utc timestampa nek ovo koristi,
+
+  Ulazni parametar je samo taj utcTimestamp, ne znam sto sam ga nazvao utcString ispod
+
+  Formatira u formatu pr. Monday, 24. May 13:42
+*/
+
 export const formatDate = (utcString: number) => {
   const utcDate = new Date(utcString * 1000);
 
