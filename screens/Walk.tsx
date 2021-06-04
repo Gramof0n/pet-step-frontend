@@ -4,8 +4,10 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
+  Platform,
   StyleSheet,
   Text,
+  ToastAndroid,
   View,
 } from "react-native";
 import MapView, { Polyline } from "react-native-maps";
@@ -58,6 +60,7 @@ const Walk = (props: Props) => {
       },
     ]);
     setIsLoading(false);
+    return;
   }
 
   return (
@@ -131,8 +134,13 @@ const Walk = (props: Props) => {
 
               const encoded_polyline = encodePolyline(latLng);
               console.log(
-                `Enkodiran polyline: ${encoded_polyline}\nVrijeme: ${time}\nDatum: ${new Date()}`
+                `Enkodiran polyline: ${encoded_polyline}\nVrijeme: ${time}\nDatum: ${new Date()}\nDistanca: ${
+                  getPathLength(latLng) / 1000
+                } `
               );
+              if (Platform.OS === "android") {
+                ToastAndroid.show("Walk completed!", ToastAndroid.SHORT);
+              }
               props.navigation.goBack();
             }}
           >

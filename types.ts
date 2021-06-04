@@ -43,3 +43,24 @@ export type WeatherData = {
   name: string;
   cod: number;
 };
+
+export type UserProfile_type = {
+  img_url: string;
+  name: string;
+  surname: string;
+  pet_name: string;
+};
+
+export type Achievement_type = {
+  requirement: number;
+  name: string;
+};
+
+export type ProfileData_type = {
+  id_user: number;
+  username: string;
+  email: string;
+  password: string;
+  user_profile: UserProfile_type;
+  achievements: Achievement_type;
+};

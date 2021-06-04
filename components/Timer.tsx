@@ -23,6 +23,7 @@ const Timer = (props: Props) => {
       } else {
         countTime();
       }
+      return () => {};
     }, [time])
   );
 

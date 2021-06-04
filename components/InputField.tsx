@@ -41,7 +41,7 @@ type Props = TextInputProps &
   };
 
 const InputField = (props: Props) => {
-  const [field, { error }] = useField(props);
+  const [_, { error }] = useField(props);
   return (
     <View style={styles.wrapper}>
       <Text style={styles.label}>{props.label}</Text>

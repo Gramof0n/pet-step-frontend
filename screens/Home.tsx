@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import { CustomDrawer } from "../components/CustomDrawer";
-import { get } from "../utils/apiCalls";
+import { get, post } from "../utils/apiCalls";
 import MainContent from "./MainContent";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Achievements from "./Achievements";
@@ -37,7 +37,14 @@ const Home = (props: Props) => {
   async function isLoggedIn() {
     const res = await get("users/me");
 
+    await createProfile(res?.data.id);
+
+    const profile_data = await get(`users/get-one/${res?.data.id}`);
+
     AsyncStorage.setItem("loggedUser", JSON.stringify(res?.data));
+    AsyncStorage.setItem("loggedUserData", JSON.stringify(profile_data?.data));
+
+    console.log(profile_data?.data);
 
     if (Object.keys(res?.data).length === 0) {
       props.navigation.dispatch(StackActions.replace("Login"));
@@ -45,6 +52,10 @@ const Home = (props: Props) => {
     } else {
       setIsLoading(false);
     }
+  }
+
+  async function createProfile(id: number) {
+    await post(`profile/${id}`, {});
   }
 
   const Drawer = createDrawerNavigator();

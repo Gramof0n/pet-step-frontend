@@ -53,7 +53,7 @@ const WeatherDisplay = () => {
         "metric"
       );
       setWeather(data);
-      console.log(data);
+      //console.log(data);
       setIsLoading(false);
       return data;
     } catch (err) {
@@ -95,7 +95,7 @@ const WeatherDisplay = () => {
             }}
           />
           <Text style={styles.weather_type}>
-            {weather?.weather[0].main} - {weather?.main.temp.toString()}°C
+            {weather?.weather[0].main} {weather?.main.temp.toString()}°C
           </Text>
           <Text style={styles.weather_wind}>
             Wind: {weather?.wind.speed}m/s

@@ -11,6 +11,7 @@ import React, { useCallback, useState } from "react";
 import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { ProfileData_type } from "../types";
 import { get } from "../utils/apiCalls";
 
 type User = {
@@ -20,7 +21,9 @@ type User = {
 type Props = DrawerContentComponentProps<DrawerContentOptions> & {};
 
 export const CustomDrawer = (props: Props) => {
+  const img_base_url = "http://192.168.1.8:3000/";
   const [loggedUser, setLoggedUser] = useState<User>();
+  const [loggedUserData, setLoggedUserData] = useState<ProfileData_type>();
 
   useFocusEffect(
     useCallback(() => {
@@ -30,7 +33,10 @@ export const CustomDrawer = (props: Props) => {
 
   async function getLoggedUser() {
     const user = await AsyncStorage.getItem("loggedUser");
+    const logged_user_data = await AsyncStorage.getItem("loggedUserData");
+
     setLoggedUser(JSON.parse(user!));
+    setLoggedUserData(JSON.parse(logged_user_data!));
   }
 
   return (
@@ -56,10 +62,10 @@ export const CustomDrawer = (props: Props) => {
           }}
         >
           <Image
-            style={{ height: 80, width: 80, borderRadius: 50 }}
             source={{
-              uri: "https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png",
+              uri: `${img_base_url}${loggedUserData?.user_profile.img_url}`,
             }}
+            style={{ height: 80, width: 80, borderRadius: 50 }}
           />
           <Text
             style={{

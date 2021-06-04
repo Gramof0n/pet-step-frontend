@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 
   button: {
     marginTop: 5,
-    backgroundColor: "#284785",
+    backgroundColor: "#5E73BD",
     padding: 7,
     maxWidth: 70,
     alignItems: "center",

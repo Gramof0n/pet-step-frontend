@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 /*
   Ovo ovdje su samo grupisani callovi na api, generalno sve REST metode koje ce nam trebat
@@ -29,16 +29,19 @@ export const get = async (path: string) => {
   }
 };
 
-export const post = async (path: string, body: object) => {
+export const post = async (
+  path: string,
+  body: object,
+  req_config?: AxiosRequestConfig | undefined
+) => {
   try {
     const request = {
       url: `${config.BASE_URL}${path}`,
       method: "POST",
     };
 
-    const res = await axios.post(request.url, body);
+    const res = await axios.post(request.url, body, req_config);
 
-    console.log("res " + res);
     return res;
   } catch (err) {
     console.log("greska");
@@ -61,14 +64,18 @@ export const remove = async (path: string) => {
   }
 };
 
-export const update = async (path: string, body: object) => {
+export const update = async (
+  path: string,
+  body: object,
+  req_config?: AxiosRequestConfig | undefined
+) => {
   try {
     const request = {
       url: `${config.BASE_URL}${path}`,
       method: "PUT",
     };
 
-    const res = await axios.put(request.url, body);
+    const res = await axios.put(request.url, body, req_config);
     return res;
   } catch (err) {
     console.log("greska");
