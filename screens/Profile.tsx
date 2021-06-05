@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Platform,
+  Alert,
 } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import PersonalInfo from "../components/PersonalInfo";
@@ -48,7 +49,7 @@ const Profile = (props: Props) => {
       const { status } =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== "granted") {
-        alert("Camera permissions required");
+        Alert.alert("Camera permissions required");
       }
     }
   }

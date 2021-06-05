@@ -51,11 +51,6 @@ export type UserProfile_type = {
   pet_name: string;
 };
 
-export type Achievement_type = {
-  requirement: number;
-  name: string;
-};
-
 export type ProfileData_type = {
   id_user: number;
   username: string;
@@ -63,4 +58,10 @@ export type ProfileData_type = {
   password: string;
   user_profile: UserProfile_type;
   achievements: Achievement_type;
+};
+export type Achievement_type = {
+  name: string;
+  requirement: number;
+  is_distance: boolean;
+  id_achievements: number;
 };

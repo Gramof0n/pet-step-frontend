@@ -7,7 +7,7 @@ import {
 import { StackActions } from "@react-navigation/routers";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { CustomDrawer } from "../components/CustomDrawer";
 import { get, post } from "../utils/apiCalls";
 import MainContent from "./MainContent";

@@ -1,6 +1,6 @@
 import { useFocusEffect } from "@react-navigation/core";
 import { LocationObject } from "expo-location";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -21,6 +21,8 @@ import {
   DrawerContentComponentProps,
   DrawerContentOptions,
 } from "@react-navigation/drawer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { update } from "../utils/apiCalls";
 
 /*
   OVDJE ISPOD SAM ISPISAO NEKI SHIT STO SE TICE POLYLINEA, BITNO ZA ONOG KO CE SE BAKCAT ISTORIJOM 
@@ -115,7 +117,7 @@ const Walk = (props: Props) => {
 
           <TouchableOpacity
             style={styles.button_stop}
-            onPress={() => {
+            onPress={async () => {
               /*
               Ovo zove funkciju da se enkodiraju koordinate hodanja u onaj polyline
 
@@ -141,6 +143,13 @@ const Walk = (props: Props) => {
               if (Platform.OS === "android") {
                 ToastAndroid.show("Walk completed!", ToastAndroid.SHORT);
               }
+              const user = await AsyncStorage.getItem("loggedUser");
+              const id = JSON.parse(user!).id;
+
+              const res = await update(`achievements/add/${id}`, {
+                requirement: getPathLength(latLng) / 1000,
+              });
+              console.log(res?.data);
               props.navigation.goBack();
             }}
           >
