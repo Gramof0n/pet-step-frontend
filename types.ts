@@ -43,3 +43,10 @@ export type WeatherData = {
   name: string;
   cod: number;
 };
+
+export type Achievement_type = {
+  name: string,
+  requirement: number,
+  is_distance: boolean
+  id_achievements: number
+}

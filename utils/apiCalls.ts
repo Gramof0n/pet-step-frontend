@@ -11,7 +11,7 @@ import axios from "axios";
 */
 
 export const config = {
-  BASE_URL: "http://192.168.1.8:3000/api/v1/",
+  BASE_URL: "http://192.168.0.104:3000/api/v1/",
 };
 
 export const get = async (path: string) => {

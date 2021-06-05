@@ -19,6 +19,8 @@ import {
   DrawerContentComponentProps,
   DrawerContentOptions,
 } from "@react-navigation/drawer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { post } from "../utils/apiCalls";
 
 /*
   OVDJE ISPOD SAM ISPISAO NEKI SHIT STO SE TICE POLYLINEA, BITNO ZA ONOG KO CE SE BAKCAT ISTORIJOM 
@@ -112,7 +114,7 @@ const Walk = (props: Props) => {
 
           <TouchableOpacity
             style={styles.button_stop}
-            onPress={() => {
+            onPress={ async () => {
               /*
               Ovo zove funkciju da se enkodiraju koordinate hodanja u onaj polyline
 
@@ -133,6 +135,9 @@ const Walk = (props: Props) => {
               console.log(
                 `Enkodiran polyline: ${encoded_polyline}\nVrijeme: ${time}\nDatum: ${new Date()}`
               );
+              const user = await AsyncStorage.getItem('loggedUser')
+              const id = JSON.parse(user!).id;
+              await post(`achievements/add/${id}`, {requirement: getPathLength(latLng) / 1000})
               props.navigation.goBack();
             }}
           >
