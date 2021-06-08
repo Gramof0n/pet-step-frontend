@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import DetailedHistory from "./screens/DetailedHistory";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Profile from "./screens/Profile";
@@ -62,6 +63,17 @@ export default function App() {
           options={{
             headerShown: true,
             title: "Walk",
+            headerStyle: { backgroundColor: "#5E73BD" },
+            headerTintColor: "white",
+          }}
+        />
+
+        <Stack.Screen
+          component={DetailedHistory}
+          name="Detailed_history"
+          options={{
+            headerShown: true,
+            title: "Detailed history",
             headerStyle: { backgroundColor: "#5E73BD" },
             headerTintColor: "white",
           }}
