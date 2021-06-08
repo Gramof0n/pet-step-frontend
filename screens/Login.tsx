@@ -5,14 +5,7 @@ import {
 import { StackActions } from "@react-navigation/native";
 import { Formik } from "formik";
 import React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  AsyncStorage,
-  ToastAndroid,
-  Image,
-} from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import InputField from "../components/InputField";
 import { post } from "../utils/apiCalls";

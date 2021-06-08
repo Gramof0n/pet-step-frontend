@@ -4,10 +4,8 @@ import React, { useCallback, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
-  Platform,
   StyleSheet,
   Text,
-  ToastAndroid,
   View,
 } from "react-native";
 import MapView, { Polyline } from "react-native-maps";
@@ -22,7 +20,8 @@ import {
   DrawerContentOptions,
 } from "@react-navigation/drawer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { update } from "../utils/apiCalls";
+import { post, update } from "../utils/apiCalls";
+import { Pedometer } from "expo-sensors";
 
 /*
   OVDJE ISPOD SAM ISPISAO NEKI SHIT STO SE TICE POLYLINEA, BITNO ZA ONOG KO CE SE BAKCAT ISTORIJOM 
@@ -39,6 +38,9 @@ const Walk = (props: Props) => {
   const [location, setLocation] = useState<Array<LocationObject | null>>([]);
   const [latLng, setLatLng] = useState<Array<LatLng>>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [startDate, setStartDate] = useState<Date>();
+  const [isPedometerAvailable, setIsPedometerAvailable] =
+    useState<boolean>(false);
 
   const [time, setTime] = useState("");
 
@@ -48,6 +50,10 @@ const Walk = (props: Props) => {
     useCallback(() => {
       console.log("Uzelo lokaciju prvi put");
       getCurrentLocation();
+      setStartDate(new Date());
+      Pedometer.isAvailableAsync().then((res) => {
+        setIsPedometerAvailable(res);
+      });
     }, [])
   );
 
@@ -140,16 +146,33 @@ const Walk = (props: Props) => {
                   getPathLength(latLng) / 1000
                 } `
               );
-              if (Platform.OS === "android") {
-                ToastAndroid.show("Walk completed!", ToastAndroid.SHORT);
-              }
+
+              const date = new Date();
+              const steps = isPedometerAvailable
+                ? await Pedometer.getStepCountAsync(startDate!, date)
+                : 500;
               const user = await AsyncStorage.getItem("loggedUser");
               const id = JSON.parse(user!).id;
+              const distance = getPathLength(latLng) / 1000;
 
-              const res = await update(`achievements/add/${id}`, {
-                requirement: getPathLength(latLng) / 1000,
+              console.log(
+                "Start date je " + startDate + " end date je " + date
+              );
+              await update(`achievements/add/${id}`, { requirement: distance });
+              await post("walk", {
+                user_id_user: id,
+                distance,
+                time,
+                date: date,
+                encoded_polyline,
               });
-              console.log(res?.data);
+
+              await update(`stats/add/${id}`, {
+                no_of_steps: steps,
+                no_of_km_walked: distance,
+                time_spent: time,
+              });
+
               props.navigation.goBack();
             }}
           >

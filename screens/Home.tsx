@@ -38,6 +38,7 @@ const Home = (props: Props) => {
     const res = await get("users/me");
 
     await createProfile(res?.data.id);
+    await initStats(res?.data.id);
 
     const profile_data = await get(`users/get-one/${res?.data.id}`);
 
@@ -56,6 +57,10 @@ const Home = (props: Props) => {
 
   async function createProfile(id: number) {
     await post(`profile/${id}`, {});
+  }
+
+  async function initStats(id: number) {
+    await post(`stats`, { user_id_user: id });
   }
 
   const Drawer = createDrawerNavigator();
