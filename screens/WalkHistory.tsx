@@ -1,5 +1,5 @@
 import Walks from "../components/WalkComponent";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Walks_type } from "../types";
 import { View, StatusBar, StyleSheet, ActivityIndicator } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
