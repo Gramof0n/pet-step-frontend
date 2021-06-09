@@ -20,8 +20,9 @@ import {
   DrawerContentOptions,
 } from "@react-navigation/drawer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { post, update } from "../utils/apiCalls";
+import { get, post, update } from "../utils/apiCalls";
 import { Pedometer } from "expo-sensors";
+import { Stats_type } from "types";
 
 /*
   OVDJE ISPOD SAM ISPISAO NEKI SHIT STO SE TICE POLYLINEA, BITNO ZA ONOG KO CE SE BAKCAT ISTORIJOM 
@@ -158,7 +159,7 @@ const Walk = (props: Props) => {
               console.log(
                 "Start date je " + startDate + " end date je " + date
               );
-              await update(`achievements/add/${id}`, { requirement: distance });
+
               await post("walk", {
                 user_id_user: id,
                 distance,
@@ -171,6 +172,13 @@ const Walk = (props: Props) => {
                 no_of_steps: steps,
                 no_of_km_walked: distance,
                 time_spent: time,
+              });
+
+              const res = await get(`stats/${id}`);
+              const dbStats: Stats_type = res?.data;
+
+              await update(`achievements/add/${id}`, {
+                requirement: dbStats.no_of_km_walked,
               });
 
               props.navigation.goBack();
